@@ -68,7 +68,7 @@ export function Programs() {
 
         <ul className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {programs.map(
-            ({ icon: Icon, title, description, href, image }) => (
+            ({ title, description, href, image }) => (
               <li key={title} className="group">
                 <Link
                   href={href}
@@ -85,14 +85,6 @@ export function Programs() {
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-
-                  {/* Icon */}
-                  <div className="absolute left-5 top-5 grid h-11 w-11 place-items-center rounded-xl bg-white/90 text-accent shadow-sm backdrop-blur-sm">
-                    <Icon
-                      className="h-5.5 w-5.5"
-                      weight="duotone"
-                    />
-                  </div>
 
                   {/* Content */}
                   <div className="relative z-10 mt-auto w-full p-5">

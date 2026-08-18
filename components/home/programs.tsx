@@ -11,7 +11,6 @@ import {
 
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ProgramCard, ProgramsDeck } from "@/components/home/programs-deck";
 
 const programs = [
   {
@@ -67,15 +66,10 @@ export function Programs() {
           subtitle="We focus on sustainable programs that empower communities and help children build a better future."
         />
 
-        <ProgramsDeck className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {programs.map(
-            ({ title, description, href, image }, index) => (
-              <ProgramCard
-                key={title}
-                index={index}
-                total={programs.length}
-                className="group"
-              >
+            ({ icon: Icon, title, description, href, image }) => (
+              <li key={title} className="group">
                 <Link
                   href={href}
                   className="relative flex min-h-80 h-full overflow-hidden rounded-2xl bg-ink"
@@ -90,7 +84,15 @@ export function Programs() {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+
+                  {/* Icon */}
+                  <div className="absolute left-5 top-5 grid h-11 w-11 place-items-center rounded-xl bg-white/90 text-accent shadow-sm backdrop-blur-sm">
+                    <Icon
+                      className="h-5.5 w-5.5"
+                      weight="duotone"
+                    />
+                  </div>
 
                   {/* Content */}
                   <div className="relative z-10 mt-auto w-full p-5">
@@ -98,20 +100,20 @@ export function Programs() {
                       {title}
                     </h3>
 
-                    <p className="text-[12.5px] leading-relaxed text-white/75">
+                    <p className="mt-2 text-[12.5px] leading-relaxed text-white/75">
                       {description}
                     </p>
 
-                    <span className="mt-2 inline-flex items-center gap-1.5 text-[12px] font-bold text-white transition-colors group-hover:text-accent">
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-white transition-colors group-hover:text-accent">
                       Learn More
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </Link>
-              </ProgramCard>
+              </li>
             ),
           )}
-        </ProgramsDeck>
+        </ul>
       </Container>
     </section>
   );

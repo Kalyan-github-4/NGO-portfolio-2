@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Buildings,
   Globe,
@@ -17,21 +18,29 @@ const values = [
     icon: Globe,
     title: "Transparent",
     description: `Every rupee is traceable, and our ${fees.platformFeePercent}% fee is shown before you give.`,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85",
   },
   {
     icon: PresentationChart,
     title: "Accountable",
     description: "We answer to our donors and to the communities we serve.",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85",
   },
   {
     icon: HandHeart,
     title: "Community Driven",
     description: "Local solutions, built for lasting and sustainable change.",
+    image:
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=85",
   },
   {
     icon: Medal,
     title: "Proven Impact",
     description: "Measurable results, reported back to you every quarter.",
+    image:
+      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=900&q=85",
   },
 ];
 
@@ -54,22 +63,37 @@ export function Values() {
       <Container>
         {/* ---------------- Value cards ---------------- */}
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {values.map(({ icon: Icon, title, description }) => (
-            <li
-              key={title}
-              className="group rounded-2xl  bg-white p-7 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 "
-            >
-              <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-accent-tint text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
-                <Icon className="h-7 w-7" />
-              </span>
+          {values.map(
+            ({ title, description, image }) => (
+              <li
+                key={title}
+                className="group relative aspect-4/5 overflow-hidden rounded-2xl bg-ink"
+              >
+                {/* Image */}
+                <Image
+                  src={image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
 
-              <h3 className="mt-5 font-display text-[19px] text-ink">{title}</h3>
+                {/* Image overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/35 to-black/5" />
 
-              <p className="mx-auto mt-2.5 max-w-60 text-[13px] leading-relaxed text-muted">
-                {description}
-              </p>
-            </li>
-          ))}
+                {/* Context */}
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display text-[20px] text-white">
+                    {title}
+                  </h3>
+
+                  <p className="mt-2 text-[13px] leading-relaxed text-white/80">
+                    {description}
+                  </p>
+                </div>
+              </li>
+            ),
+          )}
         </ul>
 
         {/* ---------------- Stats strip ---------------- */}
@@ -83,10 +107,12 @@ export function Values() {
                 className="h-10 w-10 shrink-0 text-accent"
                 weight="duotone"
               />
+
               <div>
                 <dd className="font-display text-[28px] leading-none text-ink">
                   {value}
                 </dd>
+
                 <dt className="mt-1.5 text-xs font-medium text-muted">
                   {label}
                 </dt>

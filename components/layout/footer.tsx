@@ -72,7 +72,7 @@ export function Footer() {
   return (
     <footer className="bg-brand text-white/70">
       <Container>
-        <div className="grid gap-10 py-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
+        <div className="grid gap-10 pt-10 pb-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
           {/* ---------------- Brand ---------------- */}
           <div>
             <Logo tone="light" />
@@ -183,7 +183,7 @@ export function Footer() {
       </Container>
 
       {/* ---------------- Bottom bar ---------------- */}
-      <div className="border-t border-white/10">
+      <div className="relative z-10 border-t border-white/10">
         <Container>
           <div className="flex flex-col items-center gap-5 py-2 lg:flex-row lg:justify-between">
             <p className="text-[12.5px]">

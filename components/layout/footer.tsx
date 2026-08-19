@@ -72,7 +72,7 @@ export function Footer() {
   return (
     <footer className="bg-brand text-white/70">
       <Container>
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
+        <div className="grid gap-10 py-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
           {/* ---------------- Brand ---------------- */}
           <div>
             <Logo tone="light" />

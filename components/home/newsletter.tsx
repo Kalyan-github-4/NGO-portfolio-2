@@ -64,7 +64,7 @@ export function Newsletter() {
               type="submit"
               variant="primary"
               disabled={pending}
-              className="rounded-xl px-7 py-4 disabled:opacity-60"
+              className="cursor-pointer rounded-xl px-7 py-4 disabled:opacity-60"
             >
               {pending ? "Subscribing…" : "Subscribe"}
             </Button>

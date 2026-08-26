@@ -1,6 +1,11 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
+import {
+  HeroReveal,
+  HeroRevealItem,
+  HeroStagger,
+} from "@/components/home/hero-reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { Heart, Play } from "@phosphor-icons/react/dist/ssr";
 import { heroStats } from "@/lib/site";
@@ -50,22 +55,25 @@ export function Hero() {
       <Container className="relative">
         <div className="grid items-center gap-10 pb-16 pt-10 lg:min-h-[calc(100dvh-5rem)] lg:grid-cols-[1fr_1.02fr] lg:gap-6 lg:pb-24 lg:pt-4">
           {/* ---------------- Copy ---------------- */}
-          <div className="order-2 max-w-xl lg:order-1">
+          <HeroStagger className="order-2 max-w-xl lg:order-1">
+            <HeroRevealItem className="mt-6">
+              <h1 className="font-display text-[clamp(2.25rem,4.8vw,3.6rem)] leading-[1.08] tracking-[-0.03em] text-ink">
+                Building Hope.
+                <br />
+                Creating <span className="text-accent">Change.</span>
+                <br />
+                Transforming Lives.
+              </h1>
+            </HeroRevealItem>
 
-            <h1 className="mt-6 font-display text-[clamp(2.25rem,4.8vw,3.6rem)] leading-[1.08] tracking-[-0.03em] text-ink">
-              Building Hope.
-              <br />
-              Creating <span className="text-accent">Change.</span>
-              <br />
-              Transforming Lives.
-            </h1>
+            <HeroRevealItem className="mt-6">
+              <p className="max-w-md text-[17px] leading-relaxed text-muted font-semibold">
+                Together, we can build a world where every child has the
+                opportunity to live, learn, and thrive.
+              </p>
+            </HeroRevealItem>
 
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted font-semibold">
-              Together, we can build a world where every child has the
-              opportunity to live, learn, and thrive.
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3.5">
+            <HeroRevealItem className="mt-9 flex flex-wrap items-center gap-3.5">
               <ButtonLink href="/donate" variant="primary" size="lg" className="rounded-xl">
                 <Heart className="h-4.5 w-4.5" />
                 Donate Now
@@ -77,10 +85,10 @@ export function Hero() {
                   <Play className="h-3.5 w-3.5" weight="fill" />
                 </span>
               </ButtonLink>
-            </div>
+            </HeroRevealItem>
 
             {/* Social proof */}
-            <div className="mt-10 flex items-center gap-4">
+            <HeroRevealItem className="mt-10 flex items-center gap-4">
               <div className="flex -space-x-3">
                 {supporters.map((person) => (
                   <div
@@ -104,11 +112,11 @@ export function Hero() {
                 </span>{" "}
                 {heroStats.supportersLabel}
               </p>
-            </div>
-          </div>
+            </HeroRevealItem>
+          </HeroStagger>
 
           {/* ---------------- Artwork ---------------- */}
-          <div className="order-1 lg:order-2">
+          <HeroReveal from="right" className="order-1 lg:order-2">
             <div className="relative mx-auto w-full max-w-140 lg:max-w-none">
               <Image
                 src="/india-3-webp.webp"
@@ -120,7 +128,7 @@ export function Hero() {
                 className="h-auto w-full"
               />
             </div>
-          </div>
+          </HeroReveal>
         </div>
       </Container>
     </section>

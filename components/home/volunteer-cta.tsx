@@ -3,6 +3,7 @@ import { ArrowRight, UsersThree } from "@phosphor-icons/react/dist/ssr";
 
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 
 const volunteerPhoto:
   | {
@@ -25,34 +26,45 @@ export function VolunteerCTA() {
         <div className="relative overflow-hidden rounded-t-2xl bg-[linear-gradient(105deg,var(--color-accent-tint),#f7ece1)]">
           <div className="relative grid min-h-[250px] md:grid-cols-[40%_60%] lg:min-h-[275px]">
             {/* Copy */}
-            <div className="relative z-10 flex flex-col justify-center px-6 py-6 lg:px-8 lg:py-7">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            <Reveal className="relative z-10 flex flex-col justify-center px-6 py-6 lg:px-8 lg:py-7">
+              <RevealItem
+                as="p"
+                className="text-xs font-bold uppercase tracking-[0.2em] text-accent"
+              >
                 Become a Volunteer
-              </p>
+              </RevealItem>
 
-              <h2 className="mt-2.5 font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] tracking-[-0.02em] text-ink">
+              <RevealItem as="h2" className="mt-2.5 font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] tracking-[-0.02em] text-ink">
                 Be the Change.
                 <br />
                 Volunteer Today!
-              </h2>
+              </RevealItem>
 
-              <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-muted">
+              <RevealItem
+                as="p"
+                className="mt-3 max-w-sm text-[13px] leading-relaxed text-muted"
+              >
                 Join our community of volunteers and make a difference in
                 someone&apos;s life.
-              </p>
+              </RevealItem>
 
-              <ButtonLink
-                href="/volunteer"
-                variant="primary"
-                className="group mt-5 w-fit rounded-xl"
-              >
-                Explore Opportunities
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </ButtonLink>
-            </div>
+              <RevealItem className="mt-5 w-fit">
+                <ButtonLink
+                  href="/volunteer"
+                  variant="primary"
+                  className="group rounded-xl"
+                >
+                  Explore Opportunities
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </ButtonLink>
+              </RevealItem>
+            </Reveal>
 
             {/* Image — 60% column */}
-            <div className="relative min-h-[210px] self-stretch overflow-visible md:min-h-0">
+            <Reveal
+              from="right"
+              className="relative min-h-[210px] self-stretch overflow-visible md:min-h-0"
+            >
               {/* Dotted world-map backdrop, same asset as the About section */}
               <div
                 aria-hidden="true"
@@ -94,7 +106,7 @@ export function VolunteerCTA() {
                   />
                 </div>
               )}
-            </div>
+            </Reveal>
           </div>
         </div>
       </Container>

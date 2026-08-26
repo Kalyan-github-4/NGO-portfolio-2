@@ -5,6 +5,7 @@ import { Envelope } from "@phosphor-icons/react";
 
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import {
   newsletterInitialState,
   subscribeToNewsletter,
@@ -19,7 +20,10 @@ export function Newsletter() {
   return (
     <section className="bg-white py-2.5">
       <Container>
-        <div className="mt-2 flex flex-col items-center gap-8 px-4 sm:px-6 lg:flex-row lg:justify-between lg:gap-12 lg:px-12">
+        <Reveal
+          from="bottom"
+          className="mt-2 flex flex-col items-center gap-8 px-4 sm:px-6 lg:flex-row lg:justify-between lg:gap-12 lg:px-12"
+        >
           {/* Label */}
           <div className="flex items-center gap-3">
             <span className="grid h-11 w-11 shrink-0 place-items-center">
@@ -69,7 +73,7 @@ export function Newsletter() {
               {pending ? "Subscribing…" : "Subscribe"}
             </Button>
           </form>
-        </div>
+        </Reveal>
 
         <p
           id="newsletter-status"

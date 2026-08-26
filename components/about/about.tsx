@@ -3,6 +3,7 @@ import { CheckCircle, Play } from "@phosphor-icons/react/dist/ssr";
 
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { site } from "@/lib/site";
 
 /**
@@ -38,7 +39,7 @@ export function About() {
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           {/* ---------------- Photo cluster ---------------- */}
-          <div className="relative mx-auto w-full max-w-135">
+          <Reveal from="left" className="relative mx-auto w-full max-w-135">
             {/* Dotted world-map backdrop. Sits at z-0 rather than -z-10: a
                 negative index would drop it behind the page's own background
                 and make it disappear. */}
@@ -107,27 +108,33 @@ export function About() {
                 />
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* ---------------- Copy ---------------- */}
-          <div className="max-w-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+          <Reveal className="max-w-xl">
+            <RevealItem
+              as="p"
+              className="text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
               About Us
-            </p>
+            </RevealItem>
 
-            <h2 className="mt-4 font-display text-[clamp(1.9rem,3.4vw,2.7rem)] leading-[1.15] tracking-[-0.02em] text-ink">
+            <RevealItem as="h2" className="mt-4 font-display text-[clamp(1.9rem,3.4vw,2.7rem)] leading-[1.15] tracking-[-0.02em] text-ink">
               Empowering Communities.
               <br />
               Inspiring Change.
-            </h2>
+            </RevealItem>
 
-            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted">
+            <RevealItem
+              as="p"
+              className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted"
+            >
               {site.legalName} is a non-profit organization dedicated to
               improving the lives of vulnerable children and communities across
               India.
-            </p>
+            </RevealItem>
 
-            <ul className="mt-7 space-y-3.5">
+            <RevealItem as="ul" className="mt-7 space-y-3.5">
               {commitments.map((commitment) => (
                 <li key={commitment} className="flex items-center gap-3">
                   <CheckCircle
@@ -137,9 +144,9 @@ export function About() {
                   <span className="text-[15px] text-ink/80">{commitment}</span>
                 </li>
               ))}
-            </ul>
+            </RevealItem>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3.5">
+            <RevealItem className="mt-9 flex flex-wrap items-center gap-3.5">
               <ButtonLink href="/about" variant="primary" className="rounded-xl px-7 py-4 disabled:opacity-60">
                 Learn More
               </ButtonLink>
@@ -150,8 +157,8 @@ export function About() {
                 </span>
                 Watch Our Story
               </ButtonLink>
-            </div>
-          </div>
+            </RevealItem>
+          </Reveal>
         </div>
       </Container>
     </section>

@@ -11,6 +11,7 @@ import {
 
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 
 const programs = [
   {
@@ -60,16 +61,21 @@ export function Programs() {
   return (
     <section className="bg-cream py-16 lg:py-20">
       <Container>
-        <SectionHeading
-          eyebrow="Our Programs"
-          title="Programs That Create Lasting Change"
-          subtitle="We focus on sustainable programs that empower communities and help children build a better future."
-        />
+        <Reveal from="bottom">
+          <SectionHeading
+            eyebrow="Our Programs"
+            title="Programs That Create Lasting Change"
+            subtitle="We focus on sustainable programs that empower communities and help children build a better future."
+          />
+        </Reveal>
 
-        <ul className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <Reveal
+          as="ul"
+          className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-5"
+        >
           {programs.map(
             ({ title, description, href, image }) => (
-              <li key={title} className="group">
+              <RevealItem as="li" key={title} className="group">
                 <Link
                   href={href}
                   className="relative flex min-h-80 h-full overflow-hidden rounded-2xl bg-ink"
@@ -84,7 +90,7 @@ export function Programs() {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10" />
 
                   {/* Content */}
                   <div className="relative z-10 mt-auto w-full p-5">
@@ -102,10 +108,10 @@ export function Programs() {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </RevealItem>
             ),
           )}
-        </ul>
+        </Reveal>
       </Container>
     </section>
   );

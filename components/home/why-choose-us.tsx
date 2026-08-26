@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { site } from "@/lib/site";
 
 const reasons = [
@@ -66,44 +67,53 @@ export function WhyChooseUs() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,2fr)] lg:gap-14">
           {/* ---------------- Why choose us ---------------- */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+          <Reveal>
+            <RevealItem
+              as="p"
+              className="text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
               Why Choose Us
-            </p>
+            </RevealItem>
 
-            <h2 className="mt-3 font-display text-[clamp(1.5rem,2.4vw,1.9rem)] leading-[1.2] tracking-[-0.02em] text-ink">
+            <RevealItem as="h2" className="mt-3 font-display text-[clamp(1.5rem,2.4vw,1.9rem)] leading-[1.2] tracking-[-0.02em] text-ink">
               Why Thousands
               <br />
               Trust {site.name}
-            </h2>
+            </RevealItem>
 
-            <ul className="mt-6 space-y-3">
+            <RevealItem as="ul" className="mt-6 space-y-3">
               {reasons.map((reason) => (
                 <li key={reason} className="flex items-center gap-2.5">
                   <CheckCircle className="h-5 w-5 shrink-0 text-brand-light" />
                   <span className="text-[13.5px] text-ink/80">{reason}</span>
                 </li>
               ))}
-            </ul>
+            </RevealItem>
 
-            <ButtonLink
-              href="/donate"
-              variant="primary"
-              className="mt-7 rounded-xl px-7 py-4 disabled:opacity-60"
-            >
-              Donate Now
-            </ButtonLink>
-          </div>
+            <RevealItem className="mt-7">
+              <ButtonLink
+                href="/donate"
+                variant="primary"
+                className="rounded-xl px-7 py-4 disabled:opacity-60"
+              >
+                Donate Now
+              </ButtonLink>
+            </RevealItem>
+          </Reveal>
 
           {/* ---------------- Latest news ---------------- */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            <Reveal
+              from="bottom"
+              as="p"
+              className="text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
               Latest News &amp; Stories
-            </p>
+            </Reveal>
 
-            <ul className="mt-5 grid gap-6 sm:grid-cols-3">
+            <Reveal as="ul" className="mt-5 grid gap-6 sm:grid-cols-3">
               {stories.map((story) => (
-                <li key={story.slug} className="group">
+                <RevealItem as="li" key={story.slug} className="group">
                   <Link href={`/blog/${story.slug}`} className="block">
                     <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-brand-tint">
                       {story.image ? (
@@ -136,11 +146,11 @@ export function WhyChooseUs() {
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </Link>
-                </li>
+                </RevealItem>
               ))}
-            </ul>
+            </Reveal>
 
-            <div className="mt-8 text-center">
+            <Reveal from="bottom" className="mt-8 text-center">
               <Link
                 href="/blog"
                 className="group inline-flex items-center gap-1.5 text-[13px] font-bold text-ink transition-colors hover:text-accent"
@@ -148,7 +158,7 @@ export function WhyChooseUs() {
                 View All News
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </Container>

@@ -11,6 +11,8 @@ import {
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
+import { ProgressFill } from "@/components/ui/progress-fill";
 import { formatINR } from "@/lib/fees";
 
 type Campaign = {
@@ -66,13 +68,18 @@ export function Campaigns() {
   return (
     <section className="bg-cream pb-20 pt-4 lg:pb-24">
       <Container>
-        <SectionHeading
-          eyebrow="Featured Campaigns"
-          title="Support Our Current Campaigns"
-          subtitle="Your support can bring hope and change to those who need it most."
-        />
+        <Reveal from="bottom">
+          <SectionHeading
+            eyebrow="Featured Campaigns"
+            title="Support Our Current Campaigns"
+            subtitle="Your support can bring hope and change to those who need it most."
+          />
+        </Reveal>
 
-        <ul className="mt-11 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Reveal
+          as="ul"
+          className="mt-11 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {campaigns.map((campaign) => {
             const percent = Math.min(
               100,
@@ -81,7 +88,8 @@ export function Campaigns() {
             const Icon = campaign.icon;
 
             return (
-              <li
+              <RevealItem
+                as="li"
                 key={campaign.slug}
                 className="group overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1"
               >
@@ -139,8 +147,8 @@ export function Campaigns() {
                     aria-label={`${campaign.title}: ${percent}% of goal raised`}
                     className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-line/70"
                   >
-                    <div
-                      style={{ width: `${percent}%` }}
+                    <ProgressFill
+                      percent={percent}
                       className="h-full rounded-full bg-linear-to-r from-brand to-accent"
                     />
                   </div>
@@ -156,12 +164,12 @@ export function Campaigns() {
                     </ButtonLink>
                   </div>
                 </div>
-              </li>
+              </RevealItem>
             );
           })}
-        </ul>
+        </Reveal>
 
-        <div className="mt-10 text-center">
+        <Reveal from="bottom" className="mt-10 text-center">
           <Link
             href="/campaigns"
             className="group inline-flex items-center gap-1.5 text-sm font-bold text-ink transition-colors hover:text-accent"
@@ -169,7 +177,7 @@ export function Campaigns() {
             View All Campaigns
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Logo } from "@/components/layout/logo";
@@ -18,6 +19,9 @@ import {
 import { navLinks, site, type NavLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+/** Slow-out curve — drops in quickly, then settles onto the top edge. */
+const ease = [0.16, 1, 0.3, 1] as const;
+
 /**
  * Window scroll position is an external store, so subscribe to it directly
  * rather than mirroring it into state from an effect.
@@ -32,6 +36,7 @@ const hasScrolledOnServer = () => false;
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
   const scrolled = useSyncExternalStore(
     subscribeToScroll,
     hasScrolled,
@@ -59,7 +64,15 @@ export function Navbar() {
     link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
   return (
-    <header
+    /*
+     * Slides down into place on load. Motion writes `transform: none` once
+     * `y` settles back on 0, so the header does not linger as a containing
+     * block for the `fixed` mobile sheet nested inside it.
+     */
+    <motion.header
+      initial={reducedMotion ? false : { y: "-100%", opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease }}
       className={cn(
         "sticky top-0 z-50 transition-shadow duration-300",
         scrolled
@@ -226,6 +239,6 @@ export function Navbar() {
           </a>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

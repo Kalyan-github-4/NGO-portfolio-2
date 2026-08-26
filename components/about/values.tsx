@@ -11,6 +11,8 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 import { Container } from "@/components/ui/container";
+import { CountUp } from "@/components/ui/count-up";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { fees } from "@/lib/site";
 
 const values = [
@@ -45,10 +47,22 @@ const values = [
 ];
 
 const stats = [
-  { icon: UsersThree, value: "2.4M+", label: "Lives Impacted" },
-  { icon: Buildings, value: "1,200+", label: "Communities Reached" },
-  { icon: HandsClapping, value: "3,500+", label: "Volunteers Engaged" },
-  { icon: HandCoins, value: "₹92Cr+", label: "Funds Raised" },
+  {
+    icon: UsersThree,
+    to: 2.4,
+    decimals: 1,
+    suffix: "M+",
+    label: "Lives Impacted",
+  },
+  { icon: Buildings, to: 1200, suffix: "+", label: "Communities Reached" },
+  { icon: HandsClapping, to: 3500, suffix: "+", label: "Volunteers Engaged" },
+  {
+    icon: HandCoins,
+    to: 92,
+    prefix: "₹",
+    suffix: "Cr+",
+    label: "Funds Raised",
+  },
 ];
 
 export function Values() {
@@ -62,10 +76,14 @@ export function Values() {
 
       <Container>
         {/* ---------------- Value cards ---------------- */}
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        <Reveal
+          as="ul"
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+        >
           {values.map(
             ({ title, description, image }) => (
-              <li
+              <RevealItem
+                as="li"
                 key={title}
                 className="group relative aspect-4/5 overflow-hidden rounded-2xl bg-ink"
               >
@@ -91,15 +109,18 @@ export function Values() {
                     {description}
                   </p>
                 </div>
-              </li>
+              </RevealItem>
             ),
           )}
-        </ul>
+        </Reveal>
 
         {/* ---------------- Stats strip ---------------- */}
-        <dl className="mt-6 grid gap-8 rounded-2xl bg-[linear-gradient(100deg,var(--color-accent-tint),rgba(253,238,220,0.35))] px-8 py-9 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4 lg:gap-4 lg:px-10">
-          {stats.map(({ icon: Icon, value, label }) => (
-            <div
+        <Reveal
+          as="dl"
+          className="mt-6 grid gap-8 rounded-2xl bg-[linear-gradient(100deg,var(--color-accent-tint),rgba(253,238,220,0.35))] px-8 py-9 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4 lg:gap-4 lg:px-10"
+        >
+          {stats.map(({ icon: Icon, to, decimals, prefix, suffix, label }) => (
+            <RevealItem
               key={label}
               className="flex items-center justify-center gap-4 lg:justify-start"
             >
@@ -109,17 +130,22 @@ export function Values() {
               />
 
               <div>
-                <dd className="font-display text-[28px] leading-none text-ink">
-                  {value}
+                <dd className="font-display text-[28px] leading-none text-ink tabular-nums">
+                  <CountUp
+                    to={to}
+                    decimals={decimals}
+                    prefix={prefix}
+                    suffix={suffix}
+                  />
                 </dd>
 
                 <dt className="mt-1.5 text-xs font-medium text-muted">
                   {label}
                 </dt>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </dl>
+        </Reveal>
       </Container>
     </section>
   );

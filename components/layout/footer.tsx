@@ -15,6 +15,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { Logo } from "@/components/layout/logo";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { site, socialLinks } from "@/lib/site";
 
 const socialIcons = {
@@ -72,9 +73,9 @@ export function Footer() {
   return (
     <footer className="bg-brand text-white/70">
       <Container>
-        <div className="grid gap-10 pt-10 pb-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
+        <Reveal className="grid gap-10 pt-10 pb-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.4fr] lg:gap-8">
           {/* ---------------- Brand ---------------- */}
-          <div>
+          <RevealItem>
             <Logo tone="light" />
 
             <p className="mt-5 max-w-60 text-[13px] leading-relaxed">
@@ -101,11 +102,11 @@ export function Footer() {
                 );
               })}
             </ul>
-          </div>
+          </RevealItem>
 
           {/* ---------------- Link groups ---------------- */}
           {linkGroups.map((group) => (
-            <nav key={group.title} aria-label={group.title}>
+            <RevealItem as="nav" key={group.title} aria-label={group.title}>
               <h2 className="font-display text-[16px] text-white">
                 {group.title}
               </h2>
@@ -126,11 +127,11 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </nav>
+            </RevealItem>
           ))}
 
           {/* ---------------- Contact ---------------- */}
-          <div>
+          <RevealItem>
             <h2 className="font-display text-[16px] text-white">Contact Us</h2>
 
             <ul className="mt-5 space-y-3.5 text-[13px]">
@@ -178,37 +179,53 @@ export function Footer() {
                 {site.officeHours}
               </li>
             </ul>
-          </div>
-        </div>
+          </RevealItem>
+        </Reveal>
       </Container>
 
-      {/* ---------------- Bottom bar ---------------- */}
-      <div className="relative z-10 border-t border-white/10">
-        <Container>
-          <div className="flex flex-col items-center gap-5 py-2 lg:flex-row lg:justify-between">
-            <p className="text-[12.5px]">
-              © {year} {site.legalName}. All rights reserved.
-            </p>
+      {/*
+        ---------------- Bottom bar ----------------
 
-            <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-2 text-[12.5px]">
-              {legalLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        The bar is the last content on the page, so the offset it rises from
+        would extend the document past the footer's painted box and expose a
+        strip of the body's cream ground beneath it. The clip that contains
+        that offset has to sit *inside* the scroll trigger: an
+        IntersectionObserver clips its target against every ancestor, so a
+        `Reveal` that clipped its own moving content would have nothing left
+        to intersect and would never fire at all.
+      */}
+      <Reveal className="relative z-10 border-t border-white/10">
+        <div className="overflow-clip">
+          <Container>
+            <RevealItem className="flex flex-col items-center gap-5 py-2 lg:flex-row lg:justify-between">
+              <p className="text-[12.5px]">
+                © {year} {site.legalName}. All rights reserved.
+              </p>
 
-            <ButtonLink href="/donate" variant="accent" className="rounded-full">
-              Donate Now
-            </ButtonLink>
-          </div>
-        </Container>
-      </div>
+              <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-2 text-[12.5px]">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <ButtonLink
+                href="/donate"
+                variant="accent"
+                className="rounded-full"
+              >
+                Donate Now
+              </ButtonLink>
+            </RevealItem>
+          </Container>
+        </div>
+      </Reveal>
     </footer>
   );
 }
